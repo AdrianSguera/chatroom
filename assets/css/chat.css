@@ -1,6 +1,8 @@
-body{
-    background:#eee;    
+body {
+    background-color: #6a11cb;
+    background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
 }
+
 .chat-list {
     padding: 0;
     font-size: .8rem;
@@ -9,7 +11,7 @@ body{
 .chat-list li {
     margin-bottom: 10px;
     overflow: auto;
-    color: #ffffff;
+    color: black;
 }
 
 .chat-list .chat-img {
@@ -28,7 +30,7 @@ body{
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     border-radius: 50px;
-    background: #5a99ee;
+    background: #fff;
     display: inline-block;
     padding: 10px 20px;
     position: relative;
@@ -64,7 +66,7 @@ body{
 .chat-list .in .chat-message:before {
     left: -12px;
     border-bottom: 20px solid transparent;
-    border-right: 20px solid #5a99ee;
+    border-right: 20px solid #fff;
 }
 
 .chat-list .out .chat-img {
@@ -78,13 +80,13 @@ body{
 }
 
 .chat-list .out .chat-message {
-    background: #fc6d4c;
+    background: rgb(204, 243, 146);
 }
 
 .chat-list .out .chat-message:before {
     right: -12px;
     border-bottom: 20px solid transparent;
-    border-left: 20px solid #fc6d4c;
+    border-left: 20px solid rgb(204, 243, 146);
 }
 
 .card .card-header:first-child {
@@ -92,7 +94,8 @@ body{
     -moz-border-radius: 0.3rem 0.3rem 0 0;
     border-radius: 0.3rem 0.3rem 0 0;
 }
-.card .card-header {
+
+.card-header {
     background: #17202b;
     border: 0;
     font-size: 1rem;
@@ -102,6 +105,98 @@ body{
     color: #ffffff;
 }
 
-.content{
-    margin-top:40px;    
+.card {
+    background-image: url('../img/chat-back.png');
+}
+
+.content {
+    margin-top: 40px;
+}
+
+#messageForm {
+    display: flex;
+    margin-top: 20px;
+}
+
+#messageForm input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+#messageForm button {
+    border: none;
+    background: #fff;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+#messageForm button:hover {
+    background-color: #0056b3;
+    /* Color de fondo más oscuro al pasar el mouse */
+}
+
+#messageForm img {
+    height: 25px;
+    width: auto;
+}
+
+.user-card {
+    background-color: #ccc;
+}
+
+.user-card,
+.user-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+#editForm {
+    width: 300px;
+    margin: 0 auto;
+    /* Centra el formulario horizontalmente */
+}
+
+#editForm label {
+    display: block;
+    /* Muestra cada etiqueta en una línea nueva */
+    margin-bottom: 5px;
+    /* Espacio entre etiquetas y campos de entrada */
+}
+
+#editForm input[type="text"],
+#editForm input[type="file"],
+#editForm input[type="submit"] {
+    width: 100%;
+    /* Ocupa todo el ancho disponible */
+    padding: 8px;
+    /* Espacio interno para mejorar la apariencia */
+    margin-bottom: 10px;
+    /* Espacio entre campos de entrada */
+    border: 1px solid #ccc;
+    /* Borde del campo de entrada */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    box-sizing: border-box;
+    /* Incluye el padding y el border en el ancho total */
+}
+
+#editForm input[type="submit"] {
+    background-color: #007bff;
+    /* Color de fondo del botón */
+    color: #fff;
+    /* Color del texto del botón */
+    border: none;
+    /* Quita el borde del botón */
+    cursor: pointer;
+    /* Cambia el cursor al pasar por encima del botón */
+}
+
+#editForm input[type="submit"]:hover {
+    background-color: #0056b3;
+    /* Color de fondo del botón al pasar el ratón */
 }

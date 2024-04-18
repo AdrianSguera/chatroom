@@ -1,16 +1,4 @@
 <?php
-// Incluir el archivo que contiene la lógica del servidor WebSocket
-/*require 'templates/socket.php';
-
-// Iniciar el servidor WebSocket (si aún no está en funcionamiento)
-$pidFile = 'socket.pid';
-if (!file_exists($pidFile)) {
-    $dir = __DIR__;
-    $socketFile = $dir . '/socket.php';
-    $cmd = "start /B php -q $socketFile";
-    exec($cmd, $output);
-    file_put_contents($pidFile, $output[0]);
-}*/
 include("templates/connection.php");
 session_start();
 if (isset($_POST["username"])) {
@@ -46,8 +34,8 @@ if (isset($_POST["username"])) {
 
                             <div class="mb-md-5 mt-md-4 pb-5">
 
-                                <h2 class="fw-bold mb-2 text-uppercase">Welcome</h2>
-                                <p class="text-white-50 mb-5">Please enter your username and password!</p>
+                                <h2 class="fw-bold mb-2 text-uppercase">Super Ceica Chat Room</h2>
+                                <p class="text-white-50 mb-5">Login to continue</p>
                             <form action="" method="post">
                                 <div data-mdb-input-init class="form-outline form-white mb-4">
                                     <input type="text" name="username" id="typeEmailX" class="form-control form-control-lg" />
@@ -59,7 +47,7 @@ if (isset($_POST["username"])) {
                                     <label class="form-label" for="typePasswordX">Password</label>
                                 </div>
 
-                                <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+                                <!--<p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>-->
 
                                 <button data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
                             </form>

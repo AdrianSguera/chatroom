@@ -1,6 +1,12 @@
 <?php
 include("session.php");
+include('connection.php');
 isSession();
+if (isset($_FILES['image'])) {
+    editImage($_FILES['image']['name'], $_SESSION['username']);
+    move_uploaded_file($_FILES['image']['tmp_name'], '../assets/img/' . $_FILES['image']['name']);
+    header('Location: chat.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +24,19 @@ isSession();
     <div class="container content">
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div id='userSection' class="user-card">
+                    <?php
+                    $image = getImageById(getIdByUsername($_SESSION['username']));
+                    ?>
+                    <img src="../assets/img/<?php echo $image; ?>" alt="avatar">
+                    <form action="" method="post" id="editForm" enctype="multipart/form-data">
+                        <label>Change profile picture:</label>
+                        <input type="file" name="image" accept="image/*">
+                        <input type="submit" value="Apply">
+                    </form>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                 <div class="card">
                     <div class="card-header">Chat</div>
                     <div class="card-body height3">
@@ -25,15 +44,14 @@ isSession();
                             <!-- chat room -->
                         </ul>
                     </div>
+                    <form action="" id="messageForm">
+                        <input type="text" name="content" id="textinput" placeholder="Write here...">
+                        <button type="submit"><img src="../assets/img/send-icon.png" alt="send"></button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <form id="messageForm">
-        <input type="text" name="message" placeholder="Write...">
-        <input type="hidden" name="username" value="<?php echo $_SESSION['username']; ?>">
-        <button type="submit">Send</button>
-    </form>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../assets/js/chat.js"></script>

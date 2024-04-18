@@ -57,28 +57,6 @@ function register($input_username, $input_password)
     }
 }
 
-function saveMessage($message)
-{
-    try {
-        $conn = connect();
-
-        $iduser = getIdByUsername($_SESSION['username']);
-        $stmt = $conn->prepare("INSERT INTO messages (content,iduse) VALUES (:content, :iduser)");
-        $stmt->bindParam(':content', $message);
-        $stmt->bindParam(':iduser', $iduser);
-        $stmt->execute();
-        if ($stmt->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    } catch (PDOException $e) {
-        echo "Error de conexión: " . $e->getMessage();
-    } finally {
-        $conn = null;
-    }
-}
-
 function getIdByUsername($username)
 {
     try {
@@ -87,10 +65,70 @@ function getIdByUsername($username)
         $stmt = $conn->prepare("SELECT iduser FROM user WHERE username = :username");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
-        
+
         // Devuelve solo el primer resultado (asumiendo que el nombre de usuario es único)
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['iduser'];
+    } catch (PDOException $e) {
+        echo "Error de conexión: " . $e->getMessage();
+        return false;
+    } finally {
+        $conn = null;
+    }
+}
+
+function getUsernameById($iduser)
+{
+    try {
+        $conn = connect();
+
+        $stmt = $conn->prepare("SELECT username FROM user WHERE iduser = :iduser");
+        $stmt->bindParam(':iduser', $iduser);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['username'];
+    } catch (PDOException $e) {
+        echo "Error de conexión: " . $e->getMessage();
+        return false;
+    } finally {
+        $conn = null;
+    }
+}
+
+function getImageById($iduser)
+{
+    try {
+        $conn = connect();
+
+        $stmt = $conn->prepare("SELECT image FROM user WHERE iduser = :iduser");
+        $stmt->bindParam(':iduser', $iduser);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['image'];
+    } catch (PDOException $e) {
+        echo "Error de conexión: " . $e->getMessage();
+        return false;
+    } finally {
+        $conn = null;
+    }
+}
+
+function editImage($newimage, $username)
+{
+    try {
+        $conn = connect();
+
+        $stmt = $conn->prepare("UPDATE user SET image = :image WHERE username = :username");
+        $stmt->bindParam(':image', $newimage);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     } catch (PDOException $e) {
         echo "Error de conexión: " . $e->getMessage();
         return false;
